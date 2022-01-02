@@ -41,17 +41,17 @@ let books=[
 
 let authors = [
     {
-        id       : "1",
+        id       : 1,
         name     : "John",
         books    : ["1book","12book"]   
     },
     {
-        id       : "2",
+        id       : 2,
         name     : "door",
         books    : ["123book"]   
     },
     {
-        id       : "3",
+        id       : 3,
         name     : "wind",
         books    : ["12book"]   
     }
