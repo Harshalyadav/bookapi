@@ -189,6 +189,7 @@ booky.post("/book/add",(req, res)=>{
 
     return res.json({book : database.books});
 });
+
 /*
   Route         /author/add
   Description   add new author
@@ -205,6 +206,25 @@ booky.post("/author/newauth",(req,res)=>{
 
     return res.json( {auther : newAuthor});
 });
+
+/*
+  Route         /publication/add
+  Description   add new publication
+  Access        public
+  Parameter     none
+  Method        post
+*/
+
+//...using req.body...
+
+booky.post("/publication/new",(req,res)=>{
+    const {newPublication} = req.body;
+    database.publications.push(req.body);
+
+    return res.json({publication:newPublication});
+});
+
+
 /* 
    Route         /update/isbn
    Description   update isbn
@@ -212,33 +232,38 @@ booky.post("/author/newauth",(req,res)=>{
    access        public
    method        put
 */
+
+
 booky.put("/author/isbn/:isbn",(req, res)=>{
     const updateBookIsbn = database.books.forEach(
         (book)=>{
-            book.ISBN.filter(
+            if(book.ISBN === req.params.isbn){
+                book.title = req.body.updatetitle
+                return ;
+            }} );
 
-            )
-        }
-    )
+    return res.json({book : database.books });
 });
 
 ``
 /*
-   Route        /book/update/title
-   Description  update book title
+   Route        /book/update/pageno
+   Description  update book pageNumber
    Access       public
-   Parameter    /:isbn
+   Parameter    /:page
    Methods        put
 
 */
-booky.put("/book/update/title/isbn", (req, res)=>{
+booky.put("/book/update/pageno/:isbn", (req, res)=>{
     database.books.forEach(
         (book)=>{
-            if(book.ISBN === req.params.isbn){
-                book.title = req.params.isbn
-            }
-        }
-    )
+            if(book.ISBN === req.params.isbn)
+            {
+                book.pageNo = req.body.updatepageno
+                return ;
+            }});
+            return res.json({book : database.books});
+
 });
 
 
